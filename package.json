@@ -1,0 +1,28 @@
+{
+  "name": "chattingtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filip31411/chattingtest.git"
+  },
+  "author": "filip31411",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/filip31411/chattingtest/issues"
+  },
+  "homepage": "https://github.com/filip31411/chattingtest#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.2.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.2.2",
+    "webpack": "^3.11.0"
+  }
+}
