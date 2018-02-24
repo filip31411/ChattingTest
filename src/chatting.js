@@ -1,29 +1,33 @@
 //const socket = io.connect(window.location.host);
 const socket = { emit() {} };
 
-const ChatMessage = document.querySelector('.chat_enter_message');
-const ChatSend = document.querySelector('.chat_enter_send');
-const UserName = document.querySelector('.user_name');
+class Chatting {
+  constructor () {
+    this.chatMessage = document.querySelector('.chat_enter_message');
+    this.chatSend = document.querySelector('.chat_enter_send');
+    this.userName = document.querySelector('.user_name');
 
-const sendMessage = (socket, chatMessage) => {
-  if (UserName.value=='') return;
-  ChatMessage.value = '';
-  ChatMessage.addEventListener('keypress', messageKeypress);
-  socket.emit('newMessage', {text: chatMessage});
-};
-
-const messageKeypress = (ev) => {
-  const chatMessage = ChatMessage.value;
-  const keyCode = ev.which || ev.keyCode;
-  if (ev.keyCode==13) { ev.preventDefault();
-    if (chatMessage!='') sendMessage(socket, chatMessage);
+    const sendEvent = ev => this.sendEvent(ev);
+    this.chatMessage.addEventListener('keypress', sendEvent);
+    this.chatSend.addEventListener('click', sendEvent);
   }
-};
-const sendButtonClick = () => {
-  const chatMessage = ChatMessage.value;
-  if (chatMessage!='') sendMessage(chatMessage);
-};
-ChatMessage.addEventListener('keypress', messageKeypress);
-ChatSend.addEventListener('click', sendButtonClick);
 
-export default sendMessage;
+  sendMessage (socket, chatMessage) {
+    if (this.userName.value=='') return;
+    this.chatMessage.value = '';
+    socket.emit('newMessage', {text: chatMessage});
+  }
+  sendEvent (ev) {
+    console.log(ev);
+    const blockEnter = () => {
+      if (ev.type=='keypress' && ev.keyCode==13) ev.preventDefault();
+      return Promise.resolve();
+    };
+    blockEnter().then(() => {
+      const chatMessage = this.chatMessage.value;
+      if (chatMessage!='') this.sendMessage(socket, chatMessage);
+    });
+  }
+}
+
+export default Chatting;

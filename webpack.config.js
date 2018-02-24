@@ -1,9 +1,10 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: `${__dirname}/../dist`,
+    path: `${__dirname}/dist`,
     filename: 'bundle.js'
   },
+  watch: true,
   devtool: 'source-map',
   module: {
     loaders: [

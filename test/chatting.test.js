@@ -1,4 +1,4 @@
-import sendMessage from '../src/chatting.js';
+import Chatting from '../src/chatting.js';
 
 document.body.innerHTML = '<input type="text" class="chat_enter_message"><button type="button" class="chat_enter_send"></button><input type="text" class="user_name">';
 
@@ -9,7 +9,8 @@ it('Sends the message', (done) => {
       isMsgSend = true;
     }
   };
-  if (sendMessage(fakeSocket, '')) {
+  const Chat = new Chatting();
+  if (Chat.sendMessage(fakeSocket, '')) {
     expect(isMsgSend).toBe(true);
   }
   done();
